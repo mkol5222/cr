@@ -35,4 +35,31 @@ If the package is public, no login is required for pull. If it stays private, lo
 echo "$GITHUB_TOKEN" | docker login ghcr.io -u <your-github-user-or-org> --password-stdin
 ```
 
+### quantum-management-mcp
+
+Build source: [quantum-management-mcp/Dockerfile](quantum-management-mcp/Dockerfile)
+
+This repo also includes a manual GitHub Actions workflow for publishing a single mutable tag to GitHub Container Registry:
+
+`ghcr.io/<your-github-user-or-org>/quantum-management-mcp:latest`
+
+To publish it:
+
+1. Push this repository to GitHub.
+2. Open the `Actions` tab.
+3. Run the `Publish quantum-management-mcp image` workflow manually.
+4. If this is the first push, open the package in GHCR and set visibility to `Public` if GitHub did not inherit that automatically.
+
+To pull it later:
+
+```sh
+docker pull ghcr.io/<your-github-user-or-org>/quantum-management-mcp:latest
+```
+
+To run it:
+
+```sh
+docker run --rm ghcr.io/<your-github-user-or-org>/quantum-management-mcp:latest
+```
+
 
