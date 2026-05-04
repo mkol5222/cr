@@ -1,4 +1,4 @@
-name: Publish quantum-management-mcp image
+name: Publish sparfenyuk-mcp-proxy-with-npx_uv image
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   packages: write
 
 concurrency:
-  group: publish-quantum-management-mcp
+  group: publish-sparfenyuk-mcp-proxy-with-npx_uv
   cancel-in-progress: false
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         run: |
           owner="${GITHUB_REPOSITORY_OWNER,,}"
           echo "IMAGE_REGISTRY=ghcr.io" >> "$GITHUB_ENV"
-          echo "IMAGE_NAME=${owner}/quantum-management-mcp" >> "$GITHUB_ENV"
+          echo "IMAGE_NAME=${owner}/sparfenyuk-mcp-proxy-with-npx_uv" >> "$GITHUB_ENV"
           echo "IMAGE_TAG=latest" >> "$GITHUB_ENV"
 
       - name: Log in to GHCR
@@ -42,11 +42,11 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
-          context: ./quantum-management-mcp
-          file: ./quantum-management-mcp/Dockerfile
+          context: ./sparfenyuk-mcp-proxy-with-npx_uv
+          file: ./sparfenyuk-mcp-proxy-with-npx_uv/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
-            org.opencontainers.image.description=Manual GHCR image for quantum-management-mcp
+            org.opencontainers.image.description=Manual GHCR image for sparfenyuk-mcp-proxy-with-npx_uv
